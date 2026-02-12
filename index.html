@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Twibbon  - RPL SMKN 1 Banjar</title>
+    <title>Twibbon - RPL SMKN 1 Banjar</title>
     <!-- Tailwind + DaisyUI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -162,9 +162,13 @@
             transition: transform 0.3s ease;
         }
 
-        /* MIRROR EFFECT PERMANENT - Selalu aktif */
+        /* Mirror effect - dinamis berdasarkan kamera */
         .video-mirror {
             transform: scaleX(-1);
+        }
+        
+        .video-normal {
+            transform: scaleX(1);
         }
 
         /* Frame overlay dengan efek smooth */
@@ -185,7 +189,7 @@
             filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.4));
         }
 
-        /* TIMER OVERLAY - Fitur counter sebelum foto */
+        /* TIMER OVERLAY */
         .timer-overlay {
             position: absolute;
             top: 0;
@@ -234,7 +238,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Flash effect yang lebih halus */
+        /* Flash effect */
         .flash-effect {
             animation: flash 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -246,7 +250,7 @@
             100% { opacity: 0; background-color: white; }
         }
 
-        /* Gradient text yang lebih menarik */
+        /* Gradient text */
         .gradient-text {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ec4899 100%);
             -webkit-background-clip: text;
@@ -302,7 +306,7 @@
             height: 200px;
         }
 
-        /* Result image dengan efek */
+        /* Result image */
         .result-image {
             width: 100%;
             height: auto;
@@ -423,6 +427,17 @@
             .template-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            /* Hide some floating buttons on mobile */
+            .fixed.left-6.bottom-6 {
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .fixed.bottom-6.right-6 {
+                bottom: 20px;
+                right: 20px;
+            }
         }
 
         /* Loading animation */
@@ -439,7 +454,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Pulse animation for active state */
+        /* Pulse animation */
         .pulse-active {
             animation: pulse 2s infinite;
         }
@@ -449,7 +464,7 @@
             50% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
         }
 
-        /* Tooltip modern */
+        /* Tooltip */
         .tooltip {
             position: relative;
         }
@@ -469,36 +484,6 @@
             z-index: 100;
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Camera selector */
-        .camera-selector {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 16px;
-            border-radius: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .camera-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 100px;
-            transition: all 0.3s ease;
-        }
-        
-        .camera-option.active {
-            background: rgba(102, 126, 234, 0.2);
-            border: 1px solid rgba(102, 126, 234, 0.5);
-        }
-        
-        .camera-option:hover {
-            background: rgba(255, 255, 255, 0.2);
         }
         
         /* Progress bar untuk timer */
@@ -750,6 +735,44 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* Floating Button Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .fab-shadow {
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .hover\:shadow-3xl:hover {
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.5);
+        }
+        
+        /* Badge counter for FAB */
+        .fab-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -800,7 +823,7 @@
             <header class="text-center mb-6 md:mb-8 fade-in animate__animated animate__fadeInDown">
                 <div class="inline-block border-glow rounded-2xl px-4 md:px-6 py-2 md:py-3 mb-3 glass-panel">
                     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold gradient-text">
-                        ✨ Twibbon  - RPL SMKN 1 Banjar ✨
+                        ✨ Twibbon - RPL SMKN 1 Banjar ✨
                     </h1>
                 </div>
                 <p class="text-sm md:text-base text-gray-600 max-w-xl mx-auto px-2">
@@ -829,11 +852,11 @@
                                 <div class="flex gap-2">
                                     <button id="frontCameraBtn" class="btn btn-modern flex-1 gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 rounded-xl py-2 text-sm transition-all duration-300 shadow-md hover:shadow-lg">
                                         <i data-lucide="smartphone" class="w-4 h-4"></i>
-                                        Depan
+                                        Depan (Mirror)
                                     </button>
                                     <button id="backCameraBtn" class="btn btn-modern flex-1 gap-2 btn-outline rounded-xl py-2 text-sm border-2 transition-all duration-300">
                                         <i data-lucide="camera" class="w-4 h-4"></i>
-                                        Belakang
+                                        Belakang (Normal)
                                     </button>
                                 </div>
                             </div>
@@ -924,7 +947,7 @@
                                 </div>
                                 <div>
                                     <p class="font-semibold text-sm md:text-base">Efek Mirror</p>
-                                    <p class="text-xs md:text-sm text-gray-600">Preview & HASIL FOTO mirror (seperti bercermin)</p>
+                                    <p class="text-xs md:text-sm text-gray-600">Kamera depan: Mirror ON • Kamera belakang: Mirror OFF</p>
                                 </div>
                             </div>
                         </div>
@@ -936,10 +959,10 @@
                     <!-- Frame Container -->
                     <div class="frame-container mb-4 md:mb-6 animate__animated animate__fadeInUp">
                         <div class="photo-area">
-                            <!-- Live Camera Area - DENGAN MIRROR EFFECT PERMANEN -->
+                            <!-- Live Camera Area - Mirror dinamis -->
                             <div class="camera-view">
                                 <video id="video" autoplay playsinline 
-                                       class="video-fix video-mirror"></video>
+                                       class="video-fix video-normal"></video>
                                 
                                 <!-- Flash Overlay -->
                                 <div id="flashOverlay" class="absolute inset-0 bg-white opacity-0 pointer-events-none"></div>
@@ -950,9 +973,9 @@
                                 </div>
                                 
                                 <!-- Mirror Indicator -->
-                                <div class="mirror-indicator">
+                                <div id="mirrorIndicator" class="mirror-indicator">
                                     <i data-lucide="flip-horizontal" class="w-3 h-3"></i>
-                                    <span>Mirror ON</span>
+                                    <span id="mirrorStatus">Mirror ON</span>
                                 </div>
                             </div>
                             
@@ -979,9 +1002,9 @@
                             
                             <!-- Hint text -->
                             <div class="absolute bottom-3 left-3 z-30 hidden md:block">
-                                <div class="bg-black/50 backdrop-blur-sm text-white/90 text-xs px-3 py-1.5 rounded-full">
+                                <div id="hintText" class="bg-black/50 backdrop-blur-sm text-white/90 text-xs px-3 py-1.5 rounded-full">
                                     <i data-lucide="maximize-2" class="w-3 h-3 inline mr-1"></i>
-                                    Timer 3 detik • Mirror aktif
+                                    Timer 3 detik • Kamera Depan (Mirror)
                                 </div>
                             </div>
                         </div>
@@ -1040,13 +1063,78 @@
                         <div class="inline-flex items-center gap-2 glass-panel px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-lg">
                             <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-green-500 animate-pulse"></span>
                             <span class="text-xs md:text-sm text-gray-700" id="statusText">
-                                Timer 3 detik • Mirror aktif • Template 1
+                                Timer 3 detik • Kamera Depan (Mirror) • Template 1
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- ===== FLOATING ACTION BUTTONS ===== -->
+    <!-- Floating Button Kanan Bawah (Main Menu) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <!-- Floating Button Utama -->
+        <button id="fabMain" class="w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 flex items-center justify-center relative group floating-animation">
+            <i data-lucide="plus" class="w-6 h-6 transition-transform duration-300 group-hover:rotate-90"></i>
+            <span id="fabMainBadge" class="fab-badge hidden">0</span>
+        </button>
+        
+        <!-- Floating Button Menu (muncul saat klik) -->
+        <div id="fabMenu" class="flex flex-col gap-3 items-end opacity-0 scale-0 transition-all duration-300 origin-bottom-right">
+            <!-- Reset Session -->
+            <button id="fabReset" class="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-gray-700 group">
+                <span class="text-sm font-medium">Reset Sesi</span>
+                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center group-hover:bg-red-200 transition-all">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4 text-red-600"></i>
+                </div>
+            </button>
+            
+            <!-- Ganti Kamera -->
+            <button id="fabSwitchCamera" class="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-gray-700 group">
+                <span class="text-sm font-medium" id="fabCameraText">Ganti Kamera</span>
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center group-hover:bg-blue-200 transition-all">
+                    <i data-lucide="camera" class="w-4 h-4 text-blue-600"></i>
+                </div>
+            </button>
+            
+            <!-- Download Terakhir -->
+            <button id="fabDownload" class="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-gray-700 group">
+                <span class="text-sm font-medium">Download</span>
+                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center group-hover:bg-green-200 transition-all">
+                    <i data-lucide="download" class="w-4 h-4 text-green-600"></i>
+                </div>
+            </button>
+            
+            <!-- Ambil Foto Cepat -->
+            <button id="fabQuickCapture" class="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <span class="text-sm font-medium">Ambil Foto</span>
+                <div class="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center">
+                    <i data-lucide="camera" class="w-4 h-4 text-white"></i>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Button Kiri Bawah (Quick Actions) -->
+    <div class="fixed left-6 bottom-6 z-50 flex flex-col gap-3">
+        <button id="fabTemplate" class="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group relative" data-tooltip="Ganti Template">
+            <i data-lucide="layout" class="w-5 h-5"></i>
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+        </button>
+        
+        <button id="fabInfo" class="w-12 h-12 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group" data-tooltip="Informasi">
+            <i data-lucide="info" class="w-5 h-5"></i>
+        </button>
+        
+        <button id="fabFullscreen" class="w-12 h-12 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group" data-tooltip="Fullscreen">
+            <i data-lucide="maximize-2" class="w-5 h-5"></i>
+        </button>
+        
+        <button id="fabRefresh" class="w-12 h-12 rounded-xl bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group" data-tooltip="Refresh Kamera">
+            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+        </button>
     </div>
 
     <!-- Hidden Canvases -->
@@ -1084,29 +1172,32 @@
         const currentTemplateInfo = document.getElementById('currentTemplateInfo');
         const activeTemplateName = document.getElementById('activeTemplateName');
         const activeTemplatePath = document.getElementById('activeTemplatePath');
+        const mirrorIndicator = document.getElementById('mirrorIndicator');
+        const mirrorStatus = document.getElementById('mirrorStatus');
+        const hintText = document.getElementById('hintText');
         
         // Timer Elements
         const timerOverlay = document.getElementById('timerOverlay');
         const timerNumber = document.getElementById('timerNumber');
         const timerProgress = document.getElementById('timerProgress');
         
+        // FAB Elements
+        const fabMain = document.getElementById('fabMain');
+        const fabMenu = document.getElementById('fabMenu');
+        const fabMainBadge = document.getElementById('fabMainBadge');
+        const fabCameraText = document.getElementById('fabCameraText');
+        
         // ===== TEMPLATE CONFIGURATION =====
-        // 7 Template dengan path ke folder images/
         const TEMPLATES = [
             { id: 1, name: 'Twibbon 1', path: 'images/tw.png', active: true },
             { id: 2, name: 'FrameVerse', path: 'images/tw2.png', active: true },
-            { id: 3, name: 'Twibbon Kartini 3', path: 'images/tw.png', active: true },
-            { id: 4, name: 'Twibbon Kartini 4', path: 'images/tw.png', active: true },
-            { id: 5, name: 'Twibbon Kartini 5', path: 'images/tw.png', active: true },
-            { id: 6, name: 'Twibbon Kartini 6', path: 'images/tw.png', active: true },
-            { id: 7, name: 'Twibbon Kartini 7', path: 'images/tw.png', active: true }
         ];
         
         let currentTemplateIndex = 0;
         
         // State
         let currentStream = null;
-        let facingMode = 'user';
+        let facingMode = 'user'; // 'user' = depan, 'environment' = belakang
         let captureCount = 0;
         let frameSize = { width: 0, height: 0 };
         let isDebugVisible = false;
@@ -1116,6 +1207,46 @@
         const CAMERA_AREA_SIZE = 0.8;
         const CAMERA_OFFSET = (1 - CAMERA_AREA_SIZE) / 2;
         const TIMER_DURATION = 3;
+        
+        // ===== FUNCTION UNTUK MENGATUR MIRROR =====
+        function updateMirrorEffect() {
+            const videoElement = video;
+            
+            // Hapus kedua class terlebih dahulu
+            videoElement.classList.remove('video-mirror', 'video-normal');
+            
+            // Mirror hanya untuk kamera depan
+            if (facingMode === 'user') {
+                videoElement.classList.add('video-mirror');
+                if (mirrorStatus) mirrorStatus.textContent = 'Mirror ON (Depan)';
+                if (mirrorIndicator) mirrorIndicator.style.opacity = '1';
+                if (hintText) hintText.innerHTML = '<i data-lucide="maximize-2" class="w-3 h-3 inline mr-1"></i>Timer 3 detik • Kamera Depan (Mirror ON)';
+                if (statusText) statusText.textContent = `Timer 3 detik • Kamera Depan (Mirror) • Template ${currentTemplateIndex + 1}`;
+                if (fabCameraText) fabCameraText.textContent = 'Kamera Belakang';
+            } else {
+                videoElement.classList.add('video-normal');
+                if (mirrorStatus) mirrorStatus.textContent = 'Mirror OFF (Belakang)';
+                if (mirrorIndicator) mirrorIndicator.style.opacity = '0.7';
+                if (hintText) hintText.innerHTML = '<i data-lucide="maximize-2" class="w-3 h-3 inline mr-1"></i>Timer 3 detik • Kamera Belakang (Normal)';
+                if (statusText) statusText.textContent = `Timer 3 detik • Kamera Belakang (Normal) • Template ${currentTemplateIndex + 1}`;
+                if (fabCameraText) fabCameraText.textContent = 'Kamera Depan';
+            }
+            
+            // Update icons
+            lucide.createIcons();
+        }
+        
+        // ===== UPDATE FAB BADGE =====
+        function updateFABBadge() {
+            if (fabMainBadge) {
+                if (captureCount > 0) {
+                    fabMainBadge.textContent = captureCount;
+                    fabMainBadge.classList.remove('hidden');
+                } else {
+                    fabMainBadge.classList.add('hidden');
+                }
+            }
+        }
         
         // ===== TEMPLATE FUNCTIONS =====
         function initTemplates() {
@@ -1180,7 +1311,10 @@
             currentTemplateInfo.textContent = template.name;
             activeTemplateName.textContent = template.name;
             activeTemplatePath.textContent = template.path;
-            statusText.textContent = `Timer 3 detik • Mirror aktif • Template ${currentTemplateIndex + 1}`;
+            
+            // Update status dengan info kamera
+            const cameraText = facingMode === 'user' ? 'Kamera Depan (Mirror)' : 'Kamera Belakang (Normal)';
+            statusText.textContent = `Timer 3 detik • ${cameraText} • Template ${currentTemplateIndex + 1}`;
         }
         
         // ===== SIDEBAR FUNCTIONS =====
@@ -1230,6 +1364,7 @@
                 video.onloadedmetadata = () => {
                     video.play().then(() => {
                         loadingIndicator.classList.add('hidden');
+                        updateMirrorEffect(); // Update mirror setelah video siap
                         showToast('Kamera siap digunakan!', 'success');
                     }).catch(err => {
                         console.error('Error playing video:', err);
@@ -1261,6 +1396,7 @@
                     video.onloadedmetadata = () => {
                         video.play();
                         loadingIndicator.classList.add('hidden');
+                        updateMirrorEffect();
                         showToast('Kamera siap (mode kompatibel)', 'success');
                     };
                     
@@ -1413,9 +1549,12 @@
                 videoCanvas.height = videoSize;
                 const videoCtx = videoCanvas.getContext('2d');
                 
-                // MIRROR EFFECT UNTUK HASIL FOTO - SEKARANG MIRROR JUGA!
-                videoCtx.translate(videoSize, 0);
-                videoCtx.scale(-1, 1);
+                // MIRROR EFFECT - HANYA UNTUK KAMERA DEPAN
+                if (facingMode === 'user') {
+                    // Mirror untuk kamera depan
+                    videoCtx.translate(videoSize, 0);
+                    videoCtx.scale(-1, 1);
+                }
                 
                 videoCtx.drawImage(
                     video,
@@ -1452,6 +1591,7 @@
                 captureCount++;
                 photoCounter.textContent = captureCount;
                 liveCounter.textContent = captureCount;
+                updateFABBadge();
                 
                 // Tampilkan hasil
                 resultImage.src = resultDataUrl;
@@ -1469,7 +1609,7 @@
                         🖼️ Frame: ${frameSize.width}x${frameSize.height}<br>
                         📍 Area: ${Math.round(targetX)}x${Math.round(targetY)} (${Math.round(targetWidth)}x${Math.round(targetHeight)})<br>
                         ⏱️ Timer: ${TIMER_DURATION} detik<br>
-                        🪞 Mirror: YES (Preview & Hasil)<br>
+                        🪞 Mirror: ${facingMode === 'user' ? 'YES (Depan)' : 'NO (Belakang)'}<br>
                         📁 Template: ${TEMPLATES[currentTemplateIndex].name}<br>
                         📁 Path: ${TEMPLATES[currentTemplateIndex].path}
                     `;
@@ -1505,11 +1645,30 @@
             const downloadBtn = document.getElementById('downloadBtn');
             downloadBtn.onclick = () => {
                 const link = document.createElement('a');
+                const cameraType = facingMode === 'user' ? 'depan' : 'belakang';
                 link.href = dataUrl;
-                link.download = `twibbon-${TEMPLATES[currentTemplateIndex].name.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
+                link.download = `twibbon-${cameraType}-${TEMPLATES[currentTemplateIndex].name.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
                 link.click();
                 showToast('📥 Twibbon didownload!', 'success');
             };
+            
+            // Update FAB download button
+            const fabDownload = document.getElementById('fabDownload');
+            if (fabDownload) {
+                fabDownload.onclick = () => {
+                    if (resultImage.src && resultImage.src !== '') {
+                        const link = document.createElement('a');
+                        const cameraType = facingMode === 'user' ? 'depan' : 'belakang';
+                        link.href = resultImage.src;
+                        link.download = `twibbon-${cameraType}-${TEMPLATES[currentTemplateIndex].name.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}.png`;
+                        link.click();
+                        showToast('📥 Foto didownload!', 'success');
+                        closeFabMenu();
+                    } else {
+                        showToast('Belum ada foto', 'warning');
+                    }
+                };
+            }
         }
         
         function toggleDebug() {
@@ -1562,10 +1721,14 @@
                 icon.setAttribute('data-lucide', 'alert-triangle');
                 toast.firstElementChild.classList.add('text-yellow-500');
                 toast.firstElementChild.classList.remove('text-green-500', 'text-red-500');
+            } else if (type === 'info') {
+                icon.setAttribute('data-lucide', 'info');
+                toast.firstElementChild.classList.add('text-blue-500');
+                toast.firstElementChild.classList.remove('text-green-500', 'text-red-500', 'text-yellow-500');
             } else {
                 icon.setAttribute('data-lucide', 'check-circle');
                 toast.firstElementChild.classList.add('text-green-500');
-                toast.firstElementChild.classList.remove('text-red-500', 'text-yellow-500');
+                toast.firstElementChild.classList.remove('text-red-500', 'text-yellow-500', 'text-blue-500');
             }
             
             lucide.createIcons();
@@ -1581,7 +1744,28 @@
             photoCounter.textContent = '0';
             liveCounter.textContent = '0';
             resultSection.classList.add('hidden');
+            updateFABBadge();
             showToast('🔄 Sesi direset', 'info');
+        }
+        
+        // ===== FLOATING BUTTON FUNCTIONS =====
+        function toggleFabMenu() {
+            if (fabMenu) {
+                if (fabMenu.classList.contains('opacity-0')) {
+                    fabMenu.classList.remove('opacity-0', 'scale-0');
+                    fabMenu.classList.add('opacity-100', 'scale-100');
+                } else {
+                    fabMenu.classList.add('opacity-0', 'scale-0');
+                    fabMenu.classList.remove('opacity-100', 'scale-100');
+                }
+            }
+        }
+        
+        function closeFabMenu() {
+            if (fabMenu) {
+                fabMenu.classList.add('opacity-0', 'scale-0');
+                fabMenu.classList.remove('opacity-100', 'scale-100');
+            }
         }
         
         // ===== EVENT LISTENERS =====
@@ -1591,6 +1775,7 @@
             
             photoCounter.textContent = '0';
             liveCounter.textContent = '0';
+            updateFABBadge();
         });
         
         // Capture Button
@@ -1600,11 +1785,13 @@
         document.getElementById('frontCameraBtn').addEventListener('click', () => {
             facingMode = 'user';
             startCamera();
+            closeFabMenu();
         });
         
         document.getElementById('backCameraBtn').addEventListener('click', () => {
             facingMode = 'environment';
             startCamera();
+            closeFabMenu();
         });
         
         // Sidebar Buttons
@@ -1621,38 +1808,100 @@
             resultSection.classList.add('hidden');
         });
         
-        // New Photo
+        // New Photo Button
         document.getElementById('newPhotoBtn').addEventListener('click', () => {
             resultSection.classList.add('hidden');
+            capturePhotoWithTimer();
         });
         
-        // Keyboard Shortcuts
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' || e.code === 'Enter') {
-                e.preventDefault();
-                capturePhotoWithTimer();
+        // ===== FLOATING BUTTON EVENT LISTENERS =====
+        // Main FAB Toggle
+        if (fabMain) {
+            fabMain.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleFabMenu();
+            });
+        }
+        
+        // Click outside to close FAB menu
+        document.addEventListener('click', function(e) {
+            if (fabMenu && !e.target.closest('#fabMain') && !e.target.closest('#fabMenu')) {
+                closeFabMenu();
             }
-            
-            if (e.code === 'KeyR' && e.ctrlKey) {
-                e.preventDefault();
+        });
+        
+        // FAB Reset
+        const fabReset = document.getElementById('fabReset');
+        if (fabReset) {
+            fabReset.addEventListener('click', function() {
                 resetSession();
-            }
-            
-            if (e.code === 'KeyT' && e.ctrlKey) {
-                e.preventDefault();
+                closeFabMenu();
+            });
+        }
+        
+        // FAB Switch Camera
+        const fabSwitchCamera = document.getElementById('fabSwitchCamera');
+        if (fabSwitchCamera) {
+            fabSwitchCamera.addEventListener('click', function() {
+                facingMode = facingMode === 'user' ? 'environment' : 'user';
+                startCamera();
+                closeFabMenu();
+            });
+        }
+        
+        // FAB Quick Capture
+        const fabQuickCapture = document.getElementById('fabQuickCapture');
+        if (fabQuickCapture) {
+            fabQuickCapture.addEventListener('click', function() {
+                capturePhotoWithTimer();
+                closeFabMenu();
+            });
+        }
+        
+        // FAB Template
+        const fabTemplate = document.getElementById('fabTemplate');
+        if (fabTemplate) {
+            fabTemplate.addEventListener('click', function() {
                 toggleSidebar();
-            }
-        });
+                showToast('📁 Buka gallery template', 'info');
+            });
+        }
         
-        // Cleanup
-        window.addEventListener('beforeunload', () => {
-            if (currentStream) {
-                currentStream.getTracks().forEach(track => track.stop());
-            }
-        });
+        // FAB Info
+        const fabInfo = document.getElementById('fabInfo');
+        if (fabInfo) {
+            fabInfo.addEventListener('click', function() {
+                showToast('✨ Twibbon Maker v2.0 • RPL SMKN 1 Banjar', 'info');
+            });
+        }
         
-        // Auto-refresh icons
-        setInterval(() => lucide.createIcons(), 1000);
+        // FAB Fullscreen
+        const fabFullscreen = document.getElementById('fabFullscreen');
+        if (fabFullscreen) {
+            fabFullscreen.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                    showToast('📺 Mode fullscreen aktif', 'success');
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                        showToast('📺 Keluar fullscreen', 'info');
+                    }
+                }
+            });
+        }
+        
+        // FAB Refresh Camera
+        const fabRefresh = document.getElementById('fabRefresh');
+        if (fabRefresh) {
+            fabRefresh.addEventListener('click', function() {
+                startCamera();
+                showToast('🔄 Kamera direfresh', 'success');
+            });
+        }
+        
+        // Inisialisasi mirror saat video siap
+        video.addEventListener('loadeddata', updateMirrorEffect);
     </script>
 </body>
 </html>
